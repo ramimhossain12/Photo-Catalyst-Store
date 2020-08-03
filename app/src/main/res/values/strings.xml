@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Photo Store App</string>
+
+
+    <string name="login"><u>I already have an account , login</u></string>
+    <string name="register_text"><u>Register</u></string>
+    <string name="login_text"><u>Login</u></string>
+
 </resources>
