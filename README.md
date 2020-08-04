@@ -1,4 +1,4 @@
-# Photo-Catalyst-Store
+# Photo-Catalyst-Store Features :
 
 1. Sqlite Database
 2. Firebase Authentication/Database
