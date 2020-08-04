@@ -19,14 +19,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignActivity extends AppCompatActivity  implements View.OnClickListener{
 
-    private EditText signInEmailEditText,signInPasswordEditText;
+
+public class SignActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private EditText signInEmailEditText, signInPasswordEditText;
     private TextView signUpTextView;
     private Button signInButton;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
-    private  TextView text2;
+    private TextView text2;
+    private TextView forget;
 
 
     @Override
@@ -34,7 +37,7 @@ public class SignActivity extends AppCompatActivity  implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
-    RelativeLayout relativeLayout = findViewById(R.id.layoutID);
+        RelativeLayout relativeLayout = findViewById(R.id.layoutID);
 
         AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(100);
@@ -45,42 +48,50 @@ public class SignActivity extends AppCompatActivity  implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
 
 
-
         this.setTitle("Sign In Activity");
 
         signInEmailEditText = findViewById(R.id.signInEmailEditTextID);
         signInPasswordEditText = findViewById(R.id.signInpasswordEditTextID);
 
+        forget = findViewById(R.id.forgetID);
         signUpTextView = findViewById(R.id.signUpTextViewID);
         signInButton = findViewById(R.id.signInButtonID);
         progressBar = findViewById(R.id.progressbarID);
         text2 = findViewById(R.id.back2);
 
 
+
+
+
+
         signUpTextView.setOnClickListener(this);
         signInButton.setOnClickListener(this);
+        forget.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
             case R.id.signInButtonID:
 
                 userLogin();
                 break;
 
-            case  R.id.signUpTextViewID:
+            case R.id.signUpTextViewID:
 
-                Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.forgetID:
+                Intent in = new Intent( getApplicationContext(),PasswordActivity.class);
+                startActivity(in);
                 break;
 
         }
 
     }
-
 
 
     private void userLogin() {
@@ -111,19 +122,18 @@ public class SignActivity extends AppCompatActivity  implements View.OnClickList
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
-                if (task.isSuccessful()){
-                    finish();
-                    Intent in = new Intent(getApplicationContext(),HomeActivity.class);
+                if (task.isSuccessful()) {
+                    Intent in = new Intent(getApplicationContext(), HomeActivity.class);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(in);
-                }
-                else {
+                    finish();
+                } else {
 
-                    Toast.makeText(getApplicationContext(),"Login Unsuccessful", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Login Unsuccessful", Toast.LENGTH_LONG).show();
 
                 }
             }
