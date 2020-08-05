@@ -83,6 +83,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.displayImageBtnID:
+
+                Intent intent = new Intent(HomeActivity.this,ImageActivity.class);
+                startActivity(intent);
                 break;
         }
 
@@ -106,7 +109,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
 
-                        Toast.makeText(getApplicationContext(), "Image is stored succesfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Image is stored successfully ", Toast.LENGTH_SHORT).show();
                         Upload upload = new Upload(imageName, taskSnapshot.getStorage().getDownloadUrl().toString());
                         String uploadID = databaseReference.push().getKey();
                         databaseReference.child(uploadID).setValue(upload);
@@ -119,7 +122,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         // Handle unsuccessful uploads
                         // ...
 
-                        Toast.makeText(getApplicationContext(), "Image is not stored succesfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Image is not stored successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
 
