@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -110,7 +111,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         // Get a URL to the uploaded content
 
                         Toast.makeText(getApplicationContext(), "Image is stored successfully ", Toast.LENGTH_SHORT).show();
-                        Upload upload = new Upload(imageName, taskSnapshot.getStorage().getDownloadUrl().toString());
+
+                        Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+
+                        while (!urlTask.isSuccessful());
+
+
+                        Uri downloadUrl = urlTask.getResult();
+
+
+                        Upload upload = new Upload(imageName,downloadUrl.toString());
+
+
                         String uploadID = databaseReference.push().getKey();
                         databaseReference.child(uploadID).setValue(upload);
 
