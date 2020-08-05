@@ -1,39 +1,32 @@
 package com.example.photostoreapp;
 
+
 public class Upload {
 
+    private  String  imageName;
+    private String imageUrl;
 
-    private  String  mName;
-    private String mImageUrl;
+    public Upload(String imageName, String imageUrl) {
+        this.imageName = imageName;
+        this.imageUrl = imageUrl;
+    }
 
     public Upload() {
-
     }
 
-    public Upload(String mName, String mImageUrl) {
-
-        if (mName.trim().equals("")){
-
-            mName = "No Name";
-        }
-        this.mName = mName;
-        this.mImageUrl = mImageUrl;
+    public String getImageName() {
+        return imageName;
     }
 
-
-    public String getmName() {
-        return mName;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public String getmImageUrl() {
-        return mImageUrl;
-    }
-
-    public void setmImageUrl(String mImageUrl) {
-        this.mImageUrl = mImageUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
