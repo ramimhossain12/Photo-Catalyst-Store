@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="#000000"
     android:weightSum="3"
     tools:context=".HomeActivity">
 
@@ -15,17 +16,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_weight="0.25"
+        android:fontFamily="@font/montserrat_semibold"
+        android:background="#2196F3"
         android:id="@+id/chooseImageButtonID"
         android:text="choose Image"
         style="@style/Widget.AppCompat.Button.Colored"/>
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_weight="0.25"
-
+        android:background="@drawable/bg_txt_username"
         android:textColor="#000000"
         android:hint="Enter a name for image"
+        android:textAlignment="center"
+        android:backgroundTint="#E1F5FE"
         android:layout_marginTop="10dp"
         android:id="@+id/imageNameEditTExtID"
 
@@ -47,19 +52,36 @@
         android:layout_gravity="center"
         android:id="@+id/progressbarID"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Image"
-        android:id="@+id/saveImageBtnID"
-        android:layout_marginTop="5dp"
-        android:layout_weight="0.17"/>
 
-    <Button
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show Image"
-        android:id="@+id/displayImageBtnID"
-        android:layout_marginTop="5dp"
-        android:layout_weight="0.17"/>
+        android:background="#000000"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Save Image"
+            android:id="@+id/saveImageBtnID"
+           android:background="#4CAF50"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.17"/>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Show Image"
+            android:id="@+id/displayImageBtnID"
+            android:background="#FF5722"
+            android:fontFamily="@font/montserrat_semibold"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.17"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>
