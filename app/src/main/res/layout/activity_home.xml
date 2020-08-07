@@ -1,89 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="16dp"
     android:background="#000000"
-    android:weightSum="3"
     tools:context=".HomeActivity">
 
 
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.25"
-        android:fontFamily="@font/montserrat_semibold"
-        android:background="@drawable/btn_shape"
-      android:backgroundTint="#3A9FCD"
         android:id="@+id/chooseImageButtonID"
-        android:text="choose Image"
-        style="@style/Widget.AppCompat.Button.Colored"/>
+        android:layout_width="140dp"
+        android:background="@drawable/btn_shape"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#4CAF50"
+        android:text="Choose file" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0.25"
-        android:background="@drawable/bg_txt_username"
-        android:textColor="#000000"
-        android:hint="Enter a name for image"
-        android:textAlignment="center"
-        android:backgroundTint="#E1F5FE"
-        android:layout_marginTop="10dp"
         android:id="@+id/imageNameEditTExtID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/chooseImageButtonID"
+        android:hint="Enter a name for image" />
 
-
-/>
 
     <ImageView
+        android:id="@+id/imageViewID"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_weight="2"
-        android:layout_marginTop="10dp"
-        android:id="@+id/imageViewID"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/progressbar33ID"
+        android:layout_below="@id/imageNameEditTExtID"
+        android:layout_marginTop="16dp" />
+
 
     <ProgressBar
+        android:id="@+id/progressbar33ID"
+        android:progressBackgroundTint="#FFFFFF"
+        android:layout_width="match_parent"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/saveImageBtnID"
+        android:layout_alignParentStart="true"
+        android:progressTint="#4CAF50"
+        android:layout_marginBottom="16dp" />
+
+
+    <Button
+        android:id="@+id/saveImageBtnID"
+        android:layout_width="120dp"
+        android:background="@drawable/btn_shape"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FF5722"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Upload" />
+    <Button
+        android:id="@+id/displayImageBtnID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_weight="0.16"
-        android:layout_gravity="center"
-        android:id="@+id/progressbarID"/>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#000000"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Save Image"
-            android:id="@+id/saveImageBtnID"
-            android:background="@drawable/btn_shape"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:layout_marginRight="10dp"
-            android:layout_weight="0.17"/>
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Show Image"
-            android:id="@+id/displayImageBtnID"
-            android:background="@drawable/btn_shape"
-            android:backgroundTint="#FF5722"
-            android:fontFamily="@font/montserrat_semibold"
-            android:layout_marginTop="5dp"
-            android:layout_weight="0.17"/>
-
-    </LinearLayout>
-
-
-</LinearLayout>
+        android:layout_alignBottom="@+id/saveImageBtnID"
+        android:layout_alignTop="@+id/saveImageBtnID"
+        android:textColor="#000000"
+        android:backgroundTint="#fff"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/saveImageBtnID"
+        android:gravity="center"
+        android:text="Show Uploads"
+        android:textSize="10sp" />
+</RelativeLayout>

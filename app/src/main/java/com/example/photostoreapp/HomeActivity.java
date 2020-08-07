@@ -2,18 +2,26 @@ package com.example.photostoreapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
@@ -32,9 +41,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private Button chooseButton, saveButton, displayButton;
     private ImageView imageView;
     private EditText imageNameEditText;
-    private ProgressBar progressBar;
+    private TextView tt;
+    private ProgressBar progressBar33;
     private Uri imageUri;
-
+    private   int STORAGPERMISSIONCODE = 1;
 
     DatabaseReference databaseReference;
     StorageReference storageReference;
@@ -53,9 +63,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         chooseButton = findViewById(R.id.chooseImageButtonID);
+
+
+
+
+
         saveButton = findViewById(R.id.saveImageBtnID);
         displayButton = findViewById(R.id.displayImageBtnID);
-        progressBar = findViewById(R.id.progressbarID);
+        progressBar33 = findViewById(R.id.progressbar33ID);
         imageView = findViewById(R.id.imageViewID);
         imageNameEditText = findViewById(R.id.imageNameEditTExtID);
 
@@ -70,7 +85,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.chooseImageButtonID:
+                 if (ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(HomeActivity.this,"You have already granted this permission!",Toast.LENGTH_SHORT).show();
 
+                 }
+                 else {
+                     requeststoragePermission();
+                 }
                 openFileChooser();
 
                 break;
@@ -88,6 +109,46 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(HomeActivity.this,ImageActivity.class);
                 startActivity(intent);
                 break;
+        }
+
+    }
+//111
+    private void requeststoragePermission() {
+
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+       new  AlertDialog.Builder(this)
+               .setTitle("Permission needed")
+               .setMessage("This permission is needed because of this and that ")
+               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       ActivityCompat.requestPermissions(HomeActivity.this,new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},STORAGPERMISSIONCODE);
+                   }
+               })
+               .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       dialog.dismiss();
+                   }
+               })
+               .create().show();
+        }
+        else {
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},STORAGPERMISSIONCODE);
+        }
+    }
+//111
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == STORAGPERMISSIONCODE ){
+           if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+               Toast.makeText(this,"PERMISSION GRANTED",Toast.LENGTH_SHORT).show();
+           }
+           else {
+               Toast.makeText(this,"PERMISSION DENIED",Toast.LENGTH_SHORT).show();
+           }
         }
 
     }
@@ -109,6 +170,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar33.setProgress(0);
+
+                            }
+                        },500);
+
 
                         Toast.makeText(getApplicationContext(), "Image is stored successfully ", Toast.LENGTH_SHORT).show();
 
@@ -136,12 +206,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                         Toast.makeText(getApplicationContext(), "Image is not stored successfully", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+
+
+                double progress = (100.0 * taskSnapshot.getBytesTransferred() /taskSnapshot.getTotalByteCount());
+                progressBar33.setProgress((int) progress);
+
+            }
+        });
 
     }
 
 
-    //For file chooser phone
+    //For file chooser/upload file phone
     private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
