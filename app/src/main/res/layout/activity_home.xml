@@ -17,7 +17,8 @@
         android:layout_marginTop="10dp"
         android:layout_weight="0.25"
         android:fontFamily="@font/montserrat_semibold"
-        android:background="#2196F3"
+        android:background="@drawable/btn_shape"
+      android:backgroundTint="#3A9FCD"
         android:id="@+id/chooseImageButtonID"
         android:text="choose Image"
         style="@style/Widget.AppCompat.Button.Colored"/>
@@ -65,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="Save Image"
             android:id="@+id/saveImageBtnID"
-           android:background="#4CAF50"
+            android:background="@drawable/btn_shape"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat_semibold"
             android:layout_marginRight="10dp"
@@ -76,7 +77,8 @@
             android:layout_height="wrap_content"
             android:text="Show Image"
             android:id="@+id/displayImageBtnID"
-            android:background="#FF5722"
+            android:background="@drawable/btn_shape"
+            android:backgroundTint="#FF5722"
             android:fontFamily="@font/montserrat_semibold"
             android:layout_marginTop="5dp"
             android:layout_weight="0.17"/>

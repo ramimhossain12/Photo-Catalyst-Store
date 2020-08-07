@@ -31,7 +31,7 @@
             android:id="@+id/back2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_keyboard_arrow_left_black_24dp"
+
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="#57000000"
             android:text="@string/login_text"
@@ -103,9 +103,10 @@
             android:background="@drawable/buttonshape"
             android:fontFamily="@font/montserrat_bold"
             android:text="Login"
+
             android:layout_gravity="center"
             android:textAllCaps="false"
-            android:textColor="#ffffff"
+            android:textColor="#FF5722"
             android:textSize="18sp"
             android:layout_marginTop="44dp"
             android:id="@+id/signInButtonID"
