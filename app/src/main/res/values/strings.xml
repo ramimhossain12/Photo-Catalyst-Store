@@ -1,9 +1,28 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Photo Store App</string>
 
 
     <string name="login"><u>I already have an account , login</u></string>
     <string name="register_text"><u>Register</u></string>
     <string name="login_text"><u>Login</u></string>
+
+
+ <string name="pp">Here are a couple of reasons why you\'ll want to have a Terms and Conditions for a mobile app</string>
+
+    <string name="pp2">
+
+        1. You can stop abusive users from using your app.\n
+        2. You can terminate or block accounts at your sole discretion.\n
+        3. Liability to users will be limited.
+
+
+    </string>
+
+
+
+<string name="pp4">
+
+    A Terms and Conditions could legally protect your photo store. It is in this type of legal agreement where you set the rules that your customers would follow during a purchase and limit your liability in the event that your products fail.
+</string>
 
 </resources>

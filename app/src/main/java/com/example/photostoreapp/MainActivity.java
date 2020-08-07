@@ -28,9 +28,12 @@ public class MainActivity extends AppCompatActivity {
         sp.setEventListener(new SparkEventListener(){
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
+
+
                 if (buttonState) {
                     // Button is active
-                    Intent i= new Intent(MainActivity.this,SignActivity.class);
+                    openDialog();
+                    Intent i= new Intent(MainActivity.this,TearmConditionActivity.class);
                     Toast.makeText(getApplicationContext(),"welcome For Click",Toast.LENGTH_SHORT).show();
                     startActivity(i);
                 } else {
@@ -52,4 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void openDialog() {
+
+
+        ExampleDialog exampleDialog = new ExampleDialog();
+        exampleDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+
+
 }

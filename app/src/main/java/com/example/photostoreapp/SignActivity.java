@@ -37,12 +37,8 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
-        RelativeLayout relativeLayout = findViewById(R.id.layoutID);
 
-        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(100);
-        animationDrawable.setExitFadeDuration(100);
-        animationDrawable.start();
+
 
 
         mAuth = FirebaseAuth.getInstance();
